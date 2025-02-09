@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Dosis:wght@200..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+        rel="stylesheet">
+    <title>dotlist</title>
+</head>
+
+<body>
+    <div id="background">
+        <div class="main-container">
+            <div id="login-view" class="hidden">
+                <!--spotify login-->
+                <div class="elements-container">
+                    <div class="title-container">
+                        <h1>dotlist</h1>
+                        <h2>playlists personalizadas</h2>
+                    </div>
+                    <p>entre na sua conta do spotify e crie playlists com base na sua vibe</p>
+                    <div class="button-container">
+                        <button type="button" class="button spotify-signin-button">
+                            <img src="assets/Spotify_Full_Logo_RGB_Black.png" class="black-logo"> </button>
+                    </div>
+                    <div class="separator">
+                    </div>
+                </div>
+            </div>
+            <div id="quiz-view" class="displayed">
+                <!--user questions-->
+                <div class="elements-container">
+                    <div class="title-container">
+                        <h1>quem é você?</h1>
+                    </div>
+                    <h2>responda a algumas perguntas para ganhar uma playlist. vamos lá?</h2>
+                    <div class="button-container">
+                        <button class="button text-button">iniciar</button>
+                    </div>
+                </div>
+            </div>
+            <div id="results-view" class="hidden">
+                <!--finished playlist + create button-->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
