@@ -1,121 +1,299 @@
-html,
-body {
-    height: 100%;
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Anton:wght@300;600;800&family=Nunito:wght@400;600;700&family=Dosis:wght@400;500;600&display=swap');
+
+/* CSS Reset and Base Styles */
+* {
     margin: 0;
-    font-family: "Dosis", serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    color: #2C363F;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* New background colors */
+body[data-section="quiz-genres"] {
+    background-color: #FF9F43;
+}
+
+body[data-section="quiz-artists"] {
+    background-color: #2E86C1;
+}
+
+body[data-section="quiz-name"] {
+    background-color: #58D68D;
+}
+
+/* Text input styling */
+.playlist-name-input {
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    border: 3px solid var(--dark-text);
+    border-radius: 15px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Loading animation fix */
+#loading-section .content-box {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Define our color palette as CSS variables for easy theming */
+:root {
+    /* Core colors */
+    --spotify-green: #1DB954;
+    --dark-text: #3e3f48;
+    /* Dark greyish navy blue */
+    --shadow-color: rgba(26, 27, 37, 0.2);
+    /* Based on dark text color */
+
+    /* Background color options for section transitions */
+    --bg-welcome: #FF6B6B;
+    /* Coral red */
+    --bg-intro: #4ECDC4;
+    /* Turquoise */
+    --bg-quiz-age: #45B7D1;
+    --bg-quiz-self: #abff6b;
+    --bg-quiz-free-time: #eb6bff;
+    --bg-quiz-playlist: #fff56b;
+    --bg-quiz-time: #706bff;
+    /* Sky blue */
+    --bg-loading: #96CEB4;
+    /* Sage green */
+    --bg-results: #9B59B6;
+    /* Purple */
+
+    /* Content box colors */
+    --content-bg: rgba(255, 255, 255, 0.95);
+    --border-color: var(--dark-text);
+}
+
+/* Base styles */
+body {
+    font-family: 'Dosis', sans-serif;
+    color: var(--dark-text);
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--bg-welcome);
+    /* Default background */
+    transition: background-color 0.5s ease;
+}
+
+/* Main container that centers everything */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Content box styling - the centered white box */
+.content-box {
+    background-color: var(--content-bg);
+    border-radius: 25px;
+    border: 5px solid var(--border-color);
+    padding: 40px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+/* Typography */
+.app-title {
+    font-family: 'Anton', sans-serif;
+    font-weight: 800;
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5em;
+    text-transform: lowercase;
+}
+
+h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 1em;
+}
+
+p {
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+}
+
+/* Button Styles */
+.spotify-button,
+.primary-button,
+.secondary-button,
+.option-button {
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.spotify-button {
+    background-color: var(--spotify-green);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px auto;
+}
+
+.spotify-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px var(--shadow-color);
+}
+
+.spotify-icon {
+    width: 100px;
+}
+
+/* Question styling */
+.question-box {
+    margin-bottom: 30px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.option-button {
+    background-color: white;
+    border: 2px solid var(--dark-text);
+    color: var(--dark-text);
+}
+
+.option-button:hover,
+.option-button.selected {
+    background-color: var(--dark-text);
+    color: white;
+}
+
+/* Progress bar */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(26, 27, 37, 0.1);
+    border-radius: 4px;
+    margin-bottom: 30px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--spotify-green);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Navigation buttons */
+.quiz-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.nav-button {
+    padding: 10px 20px;
+    background-color: var(--dark-text);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(26, 27, 37, 0.1);
+    border-top: 5px solid var(--spotify-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Utility classes */
 .hidden {
     display: none;
 }
 
-.displayed {
-    display: flex;
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    .content-box {
+        padding: 25px;
+        width: 95%;
+    }
+
+    .app-title {
+        font-size: 2.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1.1rem;
+    }
 }
 
-h1 {
-    font-family: "Anton", serif;
-    font-weight: 400;
-    font-style: normal;
+/* Section-specific background colors */
+body[data-section="welcome"] {
+    background-color: var(--bg-welcome);
 }
 
-h2 {
-    font-family: "Nunito Sans", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
+body[data-section="intro"] {
+    background-color: var(--bg-intro);
 }
 
-#background {
-    background-color: #1ED760;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+body[data-section="loading"] {
+    background-color: var(--bg-loading);
 }
 
-.main-container {
-    background-color: #FFFFF3;
-    border: 10px solid #FFC15E;
-    padding: 20px;
-    max-width: 80%;
-    max-height: 80%;
-    min-width: 360px;
-    min-height: 250px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: fit-content;
-    height: fit-content;
+body[data-section="results"] {
+    background-color: var(--bg-results);
 }
 
-.title-container h1,
-.title-container h2 {
-    margin: 0;
-    padding: 0;
+body[data-section="quiz_age"] {
+    background-color: var(--bg-quiz-age);
 }
 
-.button-container {
-    height: 50px;
-    padding: 10px 0 0 0;
+body[data-section="quiz_personality"] {
+    background-color: var(--bg-quiz-self);
 }
 
-.separator {
-    height: 10px;
+body[data-section="quiz_hobbies"] {
+    background-color: var(--bg-quiz-free-time);
 }
 
-.spotify-signin-button {
-    background-color: #1ED760;
+body[data-section="quiz_purpose"] {
+    background-color: var(--bg-quiz-playlist);
 }
 
-.button {
-    padding: 13px 10px 10px 13px;
-    margin: 0 3px 3px 0;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    box-shadow: -3px 3px #2C363F;
-}
-
-.spotify-signin-button:active {
-    padding: 13px 10px 10px 13px;
-    margin: 3px 3px 0 0;
-    box-shadow: inset 1px -1px #2C363F;
-}
-
-.text-button {
-    padding: 5px 5px 10px 5px;
-    min-width: 50px;
-    min-height: 30px;
-    background-color: #FFC15E
-}
-
-.text-button:active {
-    padding: 5px 5px 10px 5px;
-    margin: 2px 2px 0 0;
-    background-color: #FFA10A;
-    box-shadow: inset 1px -1px #2C363F;
-}
-
-.black-logo {
-    width: 100px;
-}
-
-.elements-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-#quiz-view h2 {
-    font-weight: 200;
+body[data-section="quiz_time"] {
+    background-color: var(--bg-quiz-time);
 }

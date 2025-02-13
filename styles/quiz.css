@@ -1,0 +1,9 @@
+.option-button.selected {
+    background-color: var(--dark-text) !important;
+    color: white !important;
+    transform: scale(0.98);
+}
+
+.option-button {
+    transition: all 0.2s ease;
+}

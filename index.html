@@ -4,51 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Anton&family=Dosis:wght@200..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-        rel="stylesheet">
-    <title>dotlist</title>
+    <title>dotlist - personalized playlists</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/quiz.css">
+
+    <!-- Google Fonts - Clean, modern sans-serif -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div id="background">
-        <div class="main-container">
-            <div id="login-view" class="hidden">
-                <!--spotify login-->
-                <div class="elements-container">
-                    <div class="title-container">
-                        <h1>dotlist</h1>
-                        <h2>playlists personalizadas</h2>
+    <!-- Main container that centers everything -->
+    <main class="app-container">
+        <!-- Each section represents a different "page" in our single-page app -->
+
+        <!-- Welcome/Login Section -->
+        <section id="welcome-section" class="app-section ">
+            <div class="content-box">
+                <h1 class="app-title">dotlist</h1>
+                <h2 class="app-subtitle">playlists that match your vibe</h2>
+                <button id="login-button" class="spotify-button">
+                    login with
+                    <img src="assets/Spotify_Full_Logo_RGB_White.png" alt="Spotify" class="spotify-icon">
+                </button>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="intro-section" class="app-section hidden">
+            <div class="content-box">
+                <h2>let's create a perfect playlist for your current mood.</h2>
+                <p>answer some questions and dotlist will guess what music you want to listen to.</p>
+                <button id="start-quiz" class="primary-button">let's start!</button>
+            </div>
+        </section>
+
+        <!-- Quiz Section - Container for all questions -->
+        <section id="quiz-section" class="app-section hidden">
+            <div class="content-box">
+                <!-- Progress indicator -->
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+
+                <!-- Question container - Questions will be dynamically inserted here -->
+                <div id="question-container">
+                    <!-- Example structure for a question -->
+                    <div class="question-box" data-question="age">
+                        <h2 class="question-text">What's your age?</h2>
+                        <div class="options-container">
+                            <button class="option-button" data-value="under18">Under 18</button>
+                            <button class="option-button" data-value="over18">18 or over</button>
+                        </div>
                     </div>
-                    <p>entre na sua conta do spotify e crie playlists com base na sua vibe</p>
-                    <div class="button-container">
-                        <button type="button" class="button spotify-signin-button">
-                            <img src="assets/Spotify_Full_Logo_RGB_Black.png" class="black-logo"> </button>
-                    </div>
-                    <div class="separator">
-                    </div>
+
+                    <!-- More question boxes will be added dynamically -->
+                </div>
+
+                <!-- Navigation buttons -->
+                <div class="quiz-navigation">
+                    <button id="prev-question" class="nav-button hidden">previous</button>
+                    <button id="next-question" class="nav-button">next</button>
                 </div>
             </div>
-            <div id="quiz-view" class="displayed">
-                <!--user questions-->
-                <div class="elements-container">
-                    <div class="title-container">
-                        <h1>quem é você?</h1>
-                    </div>
-                    <h2>responda a algumas perguntas para ganhar uma playlist. vamos lá?</h2>
-                    <div class="button-container">
-                        <button class="button text-button">iniciar</button>
-                    </div>
+        </section>
+
+        <!-- Loading Section -->
+        <section id="loading-section" class="app-section hidden">
+            <div class="content-box">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">creating your perfect playlist...</p>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="app-section hidden">
+            <div class="content-box">
+                <h2>your playlist is ready!</h2>
+                <div id="playlist-preview">
+                    <!-- Playlist details will be inserted here -->
+                </div>
+                <div class="action-buttons">
+                    <button id="open-spotify" class="spotify-button">
+                        open in Spotify
+                    </button>
+                    <button id="start-over" class="secondary-button">
+                        create another playlist
+                    </button>
                 </div>
             </div>
-            <div id="results-view" class="hidden">
-                <!--finished playlist + create button-->
+        </section>
+
+        <!-- Error Section -->
+        <section id="error-section" class="app-section hidden">
+            <div class="content-box">
+                <h2>oops! something went wrong</h2>
+                <p id="error-message"></p>
+                <button id="retry-button" class="primary-button">try again</button>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/spotify-api.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="scripts/quiz.js"></script>
+    <script type="module" src="scripts/recommendations.js"></script>
 </body>
 
 </html>
